@@ -14,6 +14,11 @@ config/name="MultiplayerGodot"
 run/main_scene="res://src/scenes/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 
+[autoload]
+
+HostController="*res://src/autoload/HostController.cs"
+JoinController="*res://src/autoload/JoinController.cs"
+
 [display]
 
 window/stretch/mode="viewport"

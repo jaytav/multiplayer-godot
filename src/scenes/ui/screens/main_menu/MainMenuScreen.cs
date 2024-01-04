@@ -2,13 +2,19 @@ using Godot;
 
 public partial class MainMenuScreen : Control
 {
+    [Signal]
+    public delegate void HostButtonPressedEventHandler();
+
+    [Signal]
+    public delegate void JoinButtonPressedEventHandler();
+
     private void OnHostButtonPressed()
     {
-        GD.Print("MainMenuScreen: OnHostButtonPressed()");
+        EmitSignal(nameof(HostButtonPressed));
     }
 
     private void OnJoinButtonPressed()
     {
-        GD.Print("MainMenuScreen: OnJoinButtonPressed()");
+        EmitSignal(nameof(JoinButtonPressed));
     }
 }
