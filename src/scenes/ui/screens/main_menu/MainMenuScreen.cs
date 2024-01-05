@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MainMenuScreen : Control
+public partial class MainMenuScreen : Screen
 {
     [Signal]
     public delegate void HostButtonPressedEventHandler();
@@ -16,5 +16,10 @@ public partial class MainMenuScreen : Control
     private void OnJoinButtonPressed()
     {
         EmitSignal(nameof(JoinButtonPressed));
+    }
+
+    private void OnButtonPressed()
+    {
+        ScreenController.ChangeScreen("InGameScreen");
     }
 }

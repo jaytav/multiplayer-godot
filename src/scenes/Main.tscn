@@ -6,4 +6,8 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_x4y2l")
 
+[node name="World" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="World"]
+
 [node name="UI" parent="." instance=ExtResource("2_r572u")]

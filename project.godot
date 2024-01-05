@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 
 HostController="*res://src/autoload/HostController.cs"
 JoinController="*res://src/autoload/JoinController.cs"
+ScreenController="*res://src/autoload/ScreenController.cs"
 
 [display]
 
