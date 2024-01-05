@@ -17,4 +17,9 @@ public partial class CharacterSpawnerController : MultiplayerSpawner
 
         GetNode(SpawnPath).AddChild(character);
     }
+
+    public void DespawnCharacter(long id)
+    {
+        GetNode($"{SpawnPath}/{id}").QueueFree();
+    }
 }
