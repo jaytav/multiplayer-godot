@@ -19,7 +19,6 @@ config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 ServerController="*res://src/autoload/ServerController.cs"
 ClientController="*res://src/autoload/ClientController.cs"
 ScreenController="*res://src/autoload/ScreenController.cs"
-CharacterSpawnerController="*res://src/autoload/CharacterSpawnerController.cs"
 CameraController="*res://src/autoload/CameraController.cs"
 
 [display]

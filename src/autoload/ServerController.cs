@@ -2,36 +2,49 @@ using Godot;
 
 public partial class ServerController : Node
 {
-    private ENetMultiplayerPeer _peer = new();
-    private CharacterSpawnerController characterSpawnerController;
+    private PackedScene _character = GD.Load<PackedScene>("res://src/character/Character.tscn");
 
     public override void _Ready()
     {
-        characterSpawnerController = GetNode<CharacterSpawnerController>("/root/CharacterSpawnerController");
-        GetNode<MainMenuScreen>("/root/Main/UI/MainMenuScreen").HostButtonPressed += OnMainMenuScreenHostButtonPressed;
+        GetNode<Button>("/root/Main/UI/MainMenuScreen/Container/HostButton").Pressed += OnMainMenuScreenHostButtonPressed;
     }
 
-    public void OnMainMenuScreenHostButtonPressed()
+    private void SpawnCharacter(long id)
+    {
+        Character character = _character.Instantiate<Character>();
+        character.Name = id.ToString();
+        GetNode("/root/Main/World/Characters").AddChild(character);
+    }
+
+    private void DespawnCharacter(long id)
+    {
+        GetNode($"/root/Main/World/Characters/{id}").QueueFree();
+    }
+
+    private void OnMainMenuScreenHostButtonPressed()
     {
         GD.Print("ServerController: OnMainMenuScreenHostButtonPressed()");
+        ENetMultiplayerPeer peer = new();
+        peer.CreateServer(3000, 3);
 
-        _peer.CreateServer(3000, 3);
-        Multiplayer.MultiplayerPeer = _peer;
+        Multiplayer.MultiplayerPeer = peer;
         Multiplayer.PeerConnected += OnMultiplayerPeerConnected;
         Multiplayer.PeerDisconnected += OnMultiplayerPeerDisconnected;
 
         // spawn host character
-        characterSpawnerController.SpawnCharacter(Multiplayer.GetUniqueId());
+        SpawnCharacter(Multiplayer.GetUniqueId());
     }
 
     private void OnMultiplayerPeerConnected(long id)
     {
         GD.Print($"ServerController: OnMultiplayerPeerConnected(): Connected with id: {id}");
-        characterSpawnerController.SpawnCharacter(id);
+        SpawnCharacter(id);
     }
 
     private void OnMultiplayerPeerDisconnected(long id)
     {
-        characterSpawnerController.DespawnCharacter(id);
+        DespawnCharacter(id);
     }
+
+
 }
