@@ -7,6 +7,11 @@ public partial class Character : Node2D
     public override void _EnterTree()
     {
         SetMultiplayerAuthority(int.Parse(Name));
+
+        if (IsMultiplayerAuthority())
+        {
+            GetNode<CameraController>("/root/CameraController").Follow = this;
+        }
     }
 
     public override void _Process(double delta)

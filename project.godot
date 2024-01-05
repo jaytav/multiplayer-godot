@@ -20,6 +20,7 @@ HostController="*res://src/autoload/HostController.cs"
 JoinController="*res://src/autoload/JoinController.cs"
 ScreenController="*res://src/autoload/ScreenController.cs"
 CharacterSpawnerController="*res://src/autoload/CharacterSpawnerController.cs"
+CameraController="*res://src/autoload/CameraController.cs"
 
 [display]
 
