@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class HostController : Node
+public partial class ServerController : Node
 {
     private ENetMultiplayerPeer _peer = new();
     private CharacterSpawnerController characterSpawnerController;
@@ -8,13 +8,14 @@ public partial class HostController : Node
     public override void _Ready()
     {
         characterSpawnerController = GetNode<CharacterSpawnerController>("/root/CharacterSpawnerController");
+        GetNode<MainMenuScreen>("/root/Main/UI/MainMenuScreen").HostButtonPressed += OnMainMenuScreenHostButtonPressed;
     }
 
     public void OnMainMenuScreenHostButtonPressed()
     {
-        GD.Print("HostController: OnMainMenuScreenHostButtonPressed()");
+        GD.Print("ServerController: OnMainMenuScreenHostButtonPressed()");
 
-        _peer.CreateServer(3000, 1);
+        _peer.CreateServer(3000, 3);
         Multiplayer.MultiplayerPeer = _peer;
         Multiplayer.PeerConnected += OnMultiplayerPeerConnected;
         Multiplayer.PeerDisconnected += OnMultiplayerPeerDisconnected;
@@ -25,7 +26,7 @@ public partial class HostController : Node
 
     private void OnMultiplayerPeerConnected(long id)
     {
-        GD.Print($"HostController: OnMultiplayerPeerConnected(): Connected with id: {id}");
+        GD.Print($"ServerController: OnMultiplayerPeerConnected(): Connected with id: {id}");
         characterSpawnerController.SpawnCharacter(id);
     }
 

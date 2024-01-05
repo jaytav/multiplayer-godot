@@ -1,22 +1,21 @@
 using Godot;
 
-public partial class JoinController : Node
+public partial class ClientController : Node
 {
     private ENetMultiplayerPeer _peer = new();
 
+    public override void _Ready()
+    {
+        GetNode<MainMenuScreen>("/root/Main/UI/MainMenuScreen").JoinButtonPressed += OnMainMenuScreenJoinButtonPressed;
+    }
+
     public void OnMainMenuScreenJoinButtonPressed()
     {
-        GD.Print("JoinController: OnMainMenuScreenJoinButtonPressed()");
+        GD.Print("ClientController: OnMainMenuScreenJoinButtonPressed()");
 
         _peer.CreateClient("127.0.0.1", 3000);
         Multiplayer.MultiplayerPeer = _peer;
-        Multiplayer.PeerConnected += OnMultiplayerPeerConnected;
         Multiplayer.ServerDisconnected += OnMultiplayerServerDisconnected;
-    }
-
-    private void OnMultiplayerPeerConnected(long id)
-    {
-        GD.Print($"JoinController: OnMultiplayerPeerConnected(): Connected with id: {id}");
     }
 
     private void OnMultiplayerServerDisconnected()
