@@ -6,7 +6,7 @@ public partial class JoinController : Node
 
     public void OnMainMenuScreenJoinButtonPressed()
     {
-        GD.Print("JoinController: HandleMainMenuJoinButtonPressed()");
+        GD.Print("JoinController: OnMainMenuScreenJoinButtonPressed()");
 
         _peer.CreateClient("127.0.0.1", 3000);
         Multiplayer.MultiplayerPeer = _peer;

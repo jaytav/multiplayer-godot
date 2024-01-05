@@ -60,7 +60,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 32
 text = "Join"
 
-[connection signal="pressed" from="Container/HostButton" to="." method="OnMainMenuButtonPressed"]
 [connection signal="pressed" from="Container/HostButton" to="." method="OnHostButtonPressed"]
-[connection signal="pressed" from="Container/JoinButton" to="." method="OnMainMenuButtonPressed"]
+[connection signal="pressed" from="Container/HostButton" to="." method="OnButtonPressed"]
 [connection signal="pressed" from="Container/JoinButton" to="." method="OnJoinButtonPressed"]
+[connection signal="pressed" from="Container/JoinButton" to="." method="OnButtonPressed"]

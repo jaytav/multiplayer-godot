@@ -1,13 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6ydmma51e5fj"]
+[gd_scene load_steps=4 format=3 uid="uid://b6ydmma51e5fj"]
 
 [ext_resource type="Script" path="res://src/scenes/Main.cs" id="1_x4y2l"]
+[ext_resource type="PackedScene" uid="uid://cgh1o42t5ux7d" path="res://src/scenes/world/World.tscn" id="2_78mnn"]
 [ext_resource type="PackedScene" uid="uid://c0yr5mgbo5v2b" path="res://src/scenes/ui/UI.tscn" id="2_r572u"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_x4y2l")
 
-[node name="World" type="Node2D" parent="."]
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="World"]
+[node name="World" parent="." instance=ExtResource("2_78mnn")]
 
 [node name="UI" parent="." instance=ExtResource("2_r572u")]

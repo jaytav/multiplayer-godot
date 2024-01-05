@@ -6,15 +6,17 @@ public partial class HostController : Node
 
     public void OnMainMenuScreenHostButtonPressed()
     {
-        GD.Print("HostController: HandleMainMenuHostButtonPressed()");
+        GD.Print("HostController: OnMainMenuScreenHostButtonPressed()");
 
         _peer.CreateServer(3000);
         Multiplayer.MultiplayerPeer = _peer;
         Multiplayer.PeerConnected += OnMultiplayerPeerConnected;
+        GetNode<CharacterSpawnerController>("/root/CharacterSpawnerController").SpawnCharacter(Multiplayer.GetUniqueId());
     }
 
     private void OnMultiplayerPeerConnected(long id)
     {
         GD.Print($"HostController: OnMultiplayerPeerConnected(): Connected with id: {id}");
+        GetNode<CharacterSpawnerController>("/root/CharacterSpawnerController").SpawnCharacter(id);
     }
 }
