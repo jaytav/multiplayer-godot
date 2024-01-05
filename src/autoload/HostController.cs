@@ -14,7 +14,7 @@ public partial class HostController : Node
     {
         GD.Print("HostController: OnMainMenuScreenHostButtonPressed()");
 
-        _peer.CreateServer(3000);
+        _peer.CreateServer(3000, 1);
         Multiplayer.MultiplayerPeer = _peer;
         Multiplayer.PeerConnected += OnMultiplayerPeerConnected;
         Multiplayer.PeerDisconnected += OnMultiplayerPeerDisconnected;

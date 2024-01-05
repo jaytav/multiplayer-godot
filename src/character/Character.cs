@@ -7,6 +7,7 @@ public partial class Character : Node2D
     public override void _EnterTree()
     {
         SetMultiplayerAuthority(int.Parse(Name));
+        GetNode<Label>("UI/PeerID").Text = Name;
 
         if (IsMultiplayerAuthority())
         {
