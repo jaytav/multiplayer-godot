@@ -1,8 +1,12 @@
 using Godot;
 
-public partial class Character : Node2D
+public partial class Character : CharacterBody2D
 {
-    private int _moveSpeed = 500;
+    public const float Speed = 300.0f;
+    public const float JumpVelocity = -400.0f;
+
+    // Get the gravity from the project settings to be synced with RigidBody nodes.
+    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
     public override void _EnterTree()
     {
@@ -15,35 +19,41 @@ public partial class Character : Node2D
         }
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (!IsMultiplayerAuthority())
         {
             return;
         }
 
-        Vector2 direction = new();
+        Vector2 velocity = Velocity;
 
-        if (Input.IsActionPressed("move_left"))
+        // Add the gravity.
+        if (!IsOnFloor())
         {
-            direction += Vector2.Left;
+            velocity.Y += gravity * (float)delta;
         }
 
-        if (Input.IsActionPressed("move_right"))
+        // Handle Jump.
+        if (Input.IsActionJustPressed("jump") && IsOnFloor())
         {
-            direction += Vector2.Right;
+            velocity.Y = JumpVelocity;
         }
 
-        if (Input.IsActionPressed("move_up"))
+        // Get the input direction and handle the movement/deceleration.
+        // As good practice, you should replace UI actions with custom gameplay actions.
+        Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+
+        if (direction != Vector2.Zero)
         {
-            direction += Vector2.Up;
+            velocity.X = direction.X * Speed;
+        }
+        else
+        {
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
         }
 
-        if (Input.IsActionPressed("move_down"))
-        {
-            direction += Vector2.Down;
-        }
-
-        GlobalPosition += direction * (float)delta * _moveSpeed;
+        Velocity = velocity;
+        MoveAndSlide();
     }
 }

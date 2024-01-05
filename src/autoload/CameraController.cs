@@ -6,15 +6,12 @@ public partial class CameraController : Node
 {
     public Node2D Follow;
 
-    private Camera2D _camera = new();
+    private Camera2D _camera;
     private float _moveSpeed = 100;
 
     public override void _Ready()
     {
-        _camera.PositionSmoothingEnabled = true;
-        _camera.PositionSmoothingSpeed = 10;
-
-        GetNode("/root/Main/World").AddChild(_camera);
+        _camera = GetNode<Camera2D>("/root/Main/World/Camera2D");
     }
 
     public override void _Process(double delta)

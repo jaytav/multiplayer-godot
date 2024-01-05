@@ -38,6 +38,8 @@ public partial class ServerController : Node
     private void OnMultiplayerPeerConnected(long id)
     {
         GD.Print($"ServerController: OnMultiplayerPeerConnected(): Connected with id: {id}");
+
+        // spawn client character
         SpawnCharacter(id);
     }
 
@@ -45,6 +47,4 @@ public partial class ServerController : Node
     {
         DespawnCharacter(id);
     }
-
-
 }
