@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccgcblqbacf5j"]
+
+[ext_resource type="Script" path="res://src/matchmaking/MatchmakingServer.cs" id="1_up2ai"]
+[ext_resource type="PackedScene" uid="uid://dcaqt3vt0mxrh" path="res://src/matchmaking/MatchmakingServerClientItem.tscn" id="2_7eups"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2yva2"]
+font_size = 48
+
+[node name="MatchmakingServer" type="Node"]
+script = ExtResource("1_up2ai")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Container" type="HBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator" type="VSeparator" parent="UI/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="UI/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="UI/Container/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/Container/Container"]
+layout_mode = 2
+text = "Matchmaking Server"
+label_settings = SubResource("LabelSettings_2yva2")
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Container/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Container" type="ScrollContainer" parent="UI/Container/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ClientItems" type="VBoxContainer" parent="UI/Container/Container/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MatchmakingServerClientItem" parent="UI/Container/Container/Container/ClientItems" instance=ExtResource("2_7eups")]
+layout_mode = 2
+
+[node name="MatchmakingServerClientItem2" parent="UI/Container/Container/Container/ClientItems" instance=ExtResource("2_7eups")]
+layout_mode = 2
+
+[node name="MatchmakingServerClientItem3" parent="UI/Container/Container/Container/ClientItems" instance=ExtResource("2_7eups")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Container/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="UI/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2

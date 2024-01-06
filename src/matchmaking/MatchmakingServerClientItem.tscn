@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcaqt3vt0mxrh"]
+
+[ext_resource type="Script" path="res://src/matchmaking/MatchmakingServerClientItem.cs" id="1_3fj0b"]
+[ext_resource type="Texture2D" uid="uid://c0nw35i13jdap" path="res://assets/textures/square.svg" id="2_w8d72"]
+
+[node name="MatchmakingServerClientItem" type="Control"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.0740741
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3fj0b")
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PeerId" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "123456789"
+vertical_alignment = 1
+
+[node name="Status" type="TextureRect" parent="."]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+texture = ExtResource("2_w8d72")
+expand_mode = 1
