@@ -33,7 +33,7 @@ text = "123456789"
 vertical_alignment = 1
 
 [node name="Status" type="TextureRect" parent="."]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(1, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5

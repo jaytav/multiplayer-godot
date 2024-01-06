@@ -1,30 +1,40 @@
 using Godot;
+using Godot.Collections;
 
 public partial class Matchmaking : Node
 {
-    public Button _playButton;
+    [Signal]
+    public delegate void MatchmakingStartedEventHandler(long id);
+
+    [Signal]
+    public delegate void BattleStartedEventHandler(bool isServer, int port);
+
+    private PackedScene _client = GD.Load<PackedScene>("res://src/matchmaking/MatchmakingClient.tscn");
+    private PackedScene _server = GD.Load<PackedScene>("res://src/matchmaking/MatchmakingServer.tscn");
 
     public override void _Ready()
     {
-        _playButton = GetNode<Button>("UI/Container/PlayButton");
-        _playButton.Disabled = true;
+        // is server
+        if (System.Array.Exists(OS.GetCmdlineArgs(), arg => arg == "--s"))
+        {
+            AddChild(_server.Instantiate());
+        }
+        else
+        {
+            AddChild(_client.Instantiate());
+        }
 
-        ENetMultiplayerPeer client = new();
-        client.CreateClient("127.0.0.1", 3000);
-        Multiplayer.MultiplayerPeer = client;
-        Multiplayer.ConnectedToServer += OnMultiplayerConnectedToServer;
+        RpcConfig("StartMatchmaking", new Dictionary() {{"rpc_mode", 1}});
+        RpcConfig("StartBattle", new Dictionary() {{"rpc_mode", 1}});
     }
 
-    private void OnPlayButtonPressed()
+    private void StartMatchmaking(long id)
     {
-        GD.Print("Play button pressed");
-        _playButton.Hide();
-
-        // start matchmaking here
+        EmitSignal(nameof(MatchmakingStarted), id);
     }
 
-    private void OnMultiplayerConnectedToServer()
+    private void StartBattle(bool isServer, int port)
     {
-        _playButton.Disabled = false;
+        EmitSignal(nameof(BattleStarted), isServer, port);
     }
 }
