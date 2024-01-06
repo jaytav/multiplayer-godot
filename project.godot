@@ -11,15 +11,8 @@ config_version=5
 [application]
 
 config/name="MultiplayerGodot"
-run/main_scene="res://src/scenes/Main.tscn"
+run/main_scene="res://src/client_host/ClientHost.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-
-[autoload]
-
-ServerController="*res://src/autoload/ServerController.cs"
-ClientController="*res://src/autoload/ClientController.cs"
-ScreenController="*res://src/autoload/ScreenController.cs"
-CameraController="*res://src/autoload/CameraController.cs"
 
 [display]
 

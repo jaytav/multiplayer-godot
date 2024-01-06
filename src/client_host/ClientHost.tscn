@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4skc0oci6gpc"]
+
+[ext_resource type="Script" path="res://src/client_host/ClientHost.cs" id="1_bh5tk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wo634"]
+font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_64kto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oyke4"]
+
+[node name="ClientServer" type="Node"]
+script = ExtResource("1_bh5tk")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Container" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/Container"]
+layout_mode = 2
+text = "Client Server"
+label_settings = SubResource("LabelSettings_wo634")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="IPAddress" type="LineEdit" parent="UI/Container"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_64kto")
+text = "127.0.0.1"
+placeholder_text = "IP Address"
+alignment = 1
+
+[node name="Port" type="LineEdit" parent="UI/Container"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oyke4")
+text = "3000"
+placeholder_text = "Port"
+alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="UI/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="UI/Container/ButtonContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="UI/Container/ButtonContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Join"
+
+[connection signal="pressed" from="UI/Container/ButtonContainer/HostButton" to="." method="OnHostButtonPressed"]
+[connection signal="pressed" from="UI/Container/ButtonContainer/JoinButton" to="." method="OnJoinButtonPressed"]
