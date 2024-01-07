@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MatchmakingClient : Node
+public partial class MatchmakingClient : Matchmaking
 {
     private Button _playButton;
     private Label _centerLabel;
@@ -12,6 +12,7 @@ public partial class MatchmakingClient : Node
 
     public override void _Ready()
     {
+        base._Ready();
         _playButton = GetNode<Button>("UI/Container/PlayButton");
         _playButton.Disabled = true;
         _centerLabel = GetNode<Label>("UI/Container/CenterLabel");
@@ -21,15 +22,14 @@ public partial class MatchmakingClient : Node
         Multiplayer.MultiplayerPeer = _matchmakingClient;
         Multiplayer.ConnectedToServer += OnMultiplayerConnectedToServer;
 
-        Matchmaking matchmaking = GetParent<Matchmaking>();
-        matchmaking.BattleStarted += OnBattleStarted;
+        BattleStarted += OnBattleStarted;
     }
 
     private void SpawnCharacter(long id)
     {
         MatchmakingClientCharacter character = _character.Instantiate<MatchmakingClientCharacter>();
         character.Name = id.ToString();
-        GetNode("../World/Characters").AddChild(character);
+        GetNode("World/Characters").AddChild(character);
     }
 
     private void OnPlayButtonPressed()
@@ -38,7 +38,7 @@ public partial class MatchmakingClient : Node
         _centerLabel.Text = "Searching...";
 
         // call Matchmaking.StartMatchmaking function on server with this clients peer id
-        GetParent().Rpc("StartMatchmaking", Multiplayer.GetUniqueId());
+        Rpc("StartMatchmaking", Multiplayer.GetUniqueId());
     }
 
     private void OnMultiplayerConnectedToServer()

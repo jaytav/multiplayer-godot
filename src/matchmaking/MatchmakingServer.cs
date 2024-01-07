@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public partial class MatchmakingServer : Node
+public partial class MatchmakingServer : Matchmaking
 {
     private PackedScene _clientItem = GD.Load<PackedScene>("res://src/matchmaking/MatchmakingServerClientItem.tscn");
     private VBoxContainer _clientItems;
@@ -10,6 +10,7 @@ public partial class MatchmakingServer : Node
 
     public override void _Ready()
     {
+        base._Ready();
         _clientItems = GetNode<VBoxContainer>("UI/Container/Container/Container/ClientItems");
 
         GD.Print("Running matchmaking server...");
@@ -25,8 +26,7 @@ public partial class MatchmakingServer : Node
             clientItem.QueueFree();
         }
 
-        Matchmaking matchmaking = GetParent<Matchmaking>();
-        matchmaking.MatchmakingStarted += OnMatchmakingStarted;
+        MatchmakingStarted += OnMatchmakingStarted;
     }
 
     private void OnMultiplayerPeerConnected(long id)
@@ -61,12 +61,12 @@ public partial class MatchmakingServer : Node
             // start first as server
             long peerId1 = _peersMatchmaking[0];
             GetNode<TextureRect>($"{clientItemPath}/{peerId1}/Status").Modulate = Colors.Green;
-            GetParent().RpcId(peerId1, "StartBattle", true, _currentPort);
+            RpcId(peerId1, "StartBattle", true, _currentPort);
 
             // start other as client
             long peerId2 = _peersMatchmaking[1];
             GetNode<TextureRect>($"{clientItemPath}/{peerId2}/Status").Modulate = Colors.Green;
-            GetParent().RpcId(peerId2, "StartBattle", false, _currentPort);
+            RpcId(peerId2, "StartBattle", false, _currentPort);
 
             _peersMatchmaking.Remove(peerId1);
             _peersMatchmaking.Remove(peerId2);

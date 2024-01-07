@@ -2,7 +2,6 @@ using Godot;
 
 public partial class MatchmakingClientCharacter : CharacterBody2D
 {
-
     private float _speed = 300.0f;
     private float _jumpVelocity = -400.0f;
     private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();

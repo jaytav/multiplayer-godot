@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MultiplayerGodot"
-run/main_scene="res://src/matchmaking/Matchmaking.tscn"
+run/main_scene="res://src/matchmaking/MatchmakingClient.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 
 [display]

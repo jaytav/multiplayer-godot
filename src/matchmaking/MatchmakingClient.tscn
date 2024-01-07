@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://sr35dde3wjgt"]
+[gd_scene load_steps=5 format=3 uid="uid://sr35dde3wjgt"]
 
 [ext_resource type="Script" path="res://src/matchmaking/MatchmakingClient.cs" id="1_8pved"]
 
@@ -8,7 +8,10 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_nfqip"]
 font_size = 32
 
-[node name="MatchmakingClient" type="Node"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuypm"]
+size = Vector2(620, 61)
+
+[node name="Matchmaking" type="Node"]
 script = ExtResource("1_8pved")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -50,5 +53,19 @@ text = "Play"
 layout_mode = 2
 label_settings = SubResource("LabelSettings_nfqip")
 horizontal_alignment = 1
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="CharacterSpawner" type="MultiplayerSpawner" parent="World"]
+_spawnable_scenes = PackedStringArray("res://src/matchmaking/MatchmakingClientCharacter.tscn")
+spawn_path = NodePath("../Characters")
+
+[node name="Characters" type="Node2D" parent="World"]
+
+[node name="Floor" type="StaticBody2D" parent="World"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Floor"]
+position = Vector2(246, 160)
+shape = SubResource("RectangleShape2D_vuypm")
 
 [connection signal="pressed" from="UI/Container/PlayButton" to="." method="OnPlayButtonPressed"]
